@@ -1,4 +1,4 @@
-Experiments with `node.js`
+Experiments with node.js.
 
 A simple API to enable `GET` and `POST` to my Google
 Cloud compute web app.

@@ -2,21 +2,30 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var winston = require('winston');
+
+// the logger
+var logger = new (winston.Logger)({
+	transports: [
+  		new (winston.transports.Console)(),
+  		new (winston.transports.File)({ filename: 'log.log' })
+	]
+});
 
 // Use express json
 app.use(express.json());
 
-// POSTs to the root dir
-app.post('/', function(req, res) {
+// POSTs
+app.post('/page', function(req, res) {
 
   // write to file
-  fs.appendFile('log1.log', JSON.stringify(req.body) + '\n', function(err) {
+  fs.appendFile('test.log', JSON.stringify(req.body) + '\n', function(err) {
 
 	// on error
 	if (err) throw err;
 	
-	// print success message to the console
-	console.log('The data was appended!');
+	// print success message to the log
+	logger.log('info', 'appended data');
 
   });
 
