@@ -3,23 +3,45 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var winston = require('winston');
+var argv = require('minimist')(process.argv.slice(2));
+
+// Use express json
+app.use(express.json());
+
+// logging directories
+var logfile = '';
+var outfile = '';
+
+// set up logging 
+if ( argv['log'] != undefined ) {
+	logfile = argv['log'];
+}
+else {
+	console.log('No log file. Using default');
+	logfile = 'log.log';
+}
+
+if ( argv['o'] != undefined ) {
+	outfile = argv['o'];
+}
+else {
+	console.log('No output file. Using default');
+	logfile = 'output.log';
+}
 
 // the logger
 var logger = new (winston.Logger)({
 	transports: [
   		new (winston.transports.Console)(),
-  		new (winston.transports.File)({ filename: 'log.log' })
+  		new (winston.transports.File)({ filename: logfile })
 	]
 });
-
-// Use express json
-app.use(express.json());
 
 // POSTs
 app.post('/page', function(req, res) {
 
   // write to file
-  fs.appendFile('test.log', JSON.stringify(req.body) + '\n', function(err) {
+  fs.appendFile(outfile, JSON.stringify(req.body) + '\n', function(err) {
 
 	// on error
 	if (err) throw err;
