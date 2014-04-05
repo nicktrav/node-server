@@ -4,7 +4,9 @@
   "author": "Nick Travers <n.e.travers@gmail.com>",
   "dependencies": {
     "express": ">= 1.2.x",
-    "winston": ">= 0.6.x"
+    "winston": ">= 0.6.x",
+    "minimist": "0.0.8"
+
   },
   "engine": "node >= 0.10.x"
 }
