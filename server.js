@@ -5,9 +5,6 @@ var fs = require('fs');
 var winston = require('winston');
 var argv = require('minimist')(process.argv.slice(2));
 
-// Use express json
-app.use(express.json());
-
 // logging directories
 var logfile = '';
 var outfile = '';
@@ -35,6 +32,25 @@ var logger = new (winston.Logger)({
   		new (winston.transports.Console)(),
   		new (winston.transports.File)({ filename: logfile })
 	]
+});
+
+// Use express json
+app.use(express.json());
+
+// middleware to allow cross origin resource sharing
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+
+    // Pass to next layer of middleware
+    next();
 });
 
 // POSTs
