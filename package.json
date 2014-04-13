@@ -5,7 +5,8 @@
   "dependencies": {
     "express": ">= 1.2.x",
     "winston": ">= 0.6.x",
-    "minimist": "0.0.8"
+    "minimist": "0.0.8",
+    "helenus": "0.6.9"
 
   },
   "engine": "node >= 0.10.x"

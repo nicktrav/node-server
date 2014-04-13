@@ -4,6 +4,7 @@ var app = express();
 var fs = require('fs');
 var winston = require('winston');
 var argv = require('minimist')(process.argv.slice(2));
+var cassandraClient = require('./lib/cassandra.js');
 
 // logging directories
 var logfile = '';
@@ -16,14 +17,6 @@ if ( argv['log'] != undefined ) {
 else {
 	console.log('No log file. Using default');
 	logfile = 'log.log';
-}
-
-if ( argv['o'] != undefined ) {
-	outfile = argv['o'];
-}
-else {
-	console.log('No output file. Using default');
-	logfile = 'output.log';
 }
 
 // the logger
@@ -53,22 +46,18 @@ app.use(function (req, res, next) {
     next();
 });
 
+// set up the connection to Cassandra
+cassandraClient.connect();
+
 // POSTs
 app.post('/page', function(req, res) {
 
-  // write to file
-  fs.appendFile(outfile, JSON.stringify(req.body) + '\n', function(err) {
+  cassandraClient.insertPage(req.body);
+  logger.log('info', 'Captured page.');
 
-	// on error
-	if (err) throw err;
-	
-	// print success message to the log
-	logger.log('info', 'appended data');
+  // return
+  res.end('Finished.\n')
 
-  });
-
-  // Respond to the calling app with success
-  res.end('Success!\n')
 });
 
 // set up the server to listen on port 1337
