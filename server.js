@@ -5,6 +5,7 @@ var fs = require('fs');
 var winston = require('winston');
 var argv = require('minimist')(process.argv.slice(2));
 var cassandraClient = require('./lib/cassandra.js');
+var bodyParser = require('body-parser');
 
 // logging directories
 var logfile = '';
@@ -28,7 +29,7 @@ var logger = new (winston.Logger)({
 });
 
 // Use express json
-app.use(express.json());
+app.use(bodyParser());
 
 // middleware to allow cross origin resource sharing
 app.use(function (req, res, next) {

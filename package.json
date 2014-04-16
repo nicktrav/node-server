@@ -6,8 +6,12 @@
     "express": ">= 1.2.x",
     "winston": ">= 0.6.x",
     "minimist": "0.0.8",
-    "helenus": "0.6.9"
-
+    "helenus": "0.6.9",
+    "body-parser": ">= 1.0.x"
   },
-  "engine": "node >= 0.10.x"
+  "engine": "node >= 0.10.x",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicktrav/node-server.git"
+  }
 }
