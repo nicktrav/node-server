@@ -29,19 +29,19 @@ var logger = new (winston.Logger)({
 });
 
 // Use express json
-app.use(bodyParser());
+app.use(bodyParser({limit: '1mb'}));
 
 // middleware to allow cross origin resource sharing
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
-
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Content-Type', 'application/json');
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+    // res.setHeader('Access-Control-Allow-Headers', 'content-type');
 
     // Pass to next layer of middleware
     next();
@@ -57,7 +57,7 @@ app.post('/page', function(req, res) {
   logger.log('info', 'Captured page.');
 
   // return
-  res.end('Finished.\n')
+  res.end(JSON.stringify({"status": "OK"}));
 
 });
 
