@@ -5,7 +5,6 @@ CREATE TABLE test_page_upload (
 	, html blob
 	, timeOnPage int
 	, device map<varchar, varchar>
-	, client varchar
 	, version varchar
 	, PRIMARY KEY (url, tstamp)
 );
