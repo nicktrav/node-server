@@ -12,8 +12,8 @@ var logfile = '';
 var outfile = '';
 
 // set up logging 
-if ( argv['log'] != undefined ) {
-	logfile = argv['log'];
+if ( argv.log !== undefined ) {
+	logfile = arg.log;
 }
 else {
 	console.log('No log file. Using default');
