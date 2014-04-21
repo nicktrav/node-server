@@ -13,6 +13,6 @@ CREATE TABLE pages (
 	, html blob
 	, timeOnPage int
 	, version varchar
-    , scrollbar map<varchar, varchar>
+    , scrollbar map<varchar, int>
 	, PRIMARY KEY (url, tstamp)
 );
