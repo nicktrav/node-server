@@ -1,7 +1,7 @@
 CREATE KEYSPACE page_upload 
 WITH REPLICATION = {
     'class' : 'SimpleStrategy'
-    , 'replication_factor' : 2 
+    , 'replication_factor' : 1
 };
 
 USE page_upload;
@@ -13,5 +13,6 @@ CREATE TABLE pages (
 	, html blob
 	, timeOnPage int
 	, version varchar
+    , scrollbar map<varchar, varchar>
 	, PRIMARY KEY (url, tstamp)
 );
