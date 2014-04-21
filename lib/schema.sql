@@ -1,10 +1,17 @@
-CREATE TABLE test_page_upload (
+CREATE KEYSPACE page_upload 
+WITH REPLICATION = {
+    'class' : 'SimpleStrategy'
+    , 'replication_factor' : 2 
+};
+
+USE page_upload;
+
+CREATE TABLE pages (
 	url varchar
 	, tstamp timestamp 
 	, title varchar
 	, html blob
 	, timeOnPage int
-	, device map<varchar, varchar>
 	, version varchar
 	, PRIMARY KEY (url, tstamp)
 );
