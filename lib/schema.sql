@@ -14,5 +14,6 @@ CREATE TABLE pages (
 	, timeOnPage int
 	, version varchar
     , scrollbar map<varchar, int>
+    , device map<varchar, varchar>
 	, PRIMARY KEY (url, tstamp)
 );
